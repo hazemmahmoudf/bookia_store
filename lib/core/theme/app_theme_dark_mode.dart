@@ -5,7 +5,10 @@ class AppThemeDarkMode {
  static ThemeData theme=ThemeData(
      fontFamily: "DMSerifDisplay",
   scaffoldBackgroundColor: Colors.black,
-   textTheme: darkTextStyle
+   textTheme: darkTextStyle,
+   appBarTheme: AppBarTheme(
+     backgroundColor: Colors.transparent
+   )
  );
 
 }
