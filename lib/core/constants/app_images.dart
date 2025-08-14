@@ -3,7 +3,7 @@ class AppImages {
   AppImages._();
 
   static const String imagesBackGroundSplashLight = 'assets/images/back_ground_splash_light.png';
-  static const String imagesSplashLogo12 = 'assets/images/splash_logo_12+.png';
+  static const String imagesSplashLogo12 = 'assets/images/splash_logo_12.png';
   static const String imagesWelcomeBackGround = 'assets/images/welcome_back_ground.png';
   static const String imageSplashLogo = 'assets/images/image_splash_logo.png';
   static const String iconFaceBook = 'assets/images/icon_face_book.png';
