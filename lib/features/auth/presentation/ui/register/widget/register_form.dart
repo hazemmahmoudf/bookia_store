@@ -69,14 +69,26 @@ class _RegisterFormState extends State<RegisterForm> {
             obscureText: obscureTextP,
             controller: controllerPassword,
             validator: (v) {
-              RegExp password = RegExp(
-                r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*~]).{8,}$',
+              RegExp capitalLiter = RegExp(
+                r'(?=.*[A-Z])',
               );
+              RegExp smallLitter=RegExp(r'(?=.*[a-z])');
+              RegExp number=RegExp(r'(?=.*[0-9])');
+              RegExp symbols=RegExp(r'(?=.*[^A-Za-z0-9])');
               if (v == null || v.isEmpty) {
                 return "Please enter your password";
-              } else if (!password.hasMatch(v)) {
-                return "The password does not match";
+              } else if (!capitalLiter.hasMatch(v)) {
+                return "Must contain captain letter";
+              }else if (!smallLitter.hasMatch(v)) {
+                return "Must contain small letter";
+              }else if (!number.hasMatch(v)) {
+                return "Must contain number";
+              }else if (!symbols.hasMatch(v)) {
+                return "Must contain symbols";
+              }else if (v.length<6) {
+                return "Must contain 6 or more element";
               }
+
               return null;
             },
             cursorColor: AppColor.mainColor,

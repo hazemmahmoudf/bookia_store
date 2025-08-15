@@ -33,7 +33,7 @@ class _LoginFormState extends State<LoginForm> {
             cursorColor: AppColor.mainColor,
 
             decoration: InputDecoration(
-              hintText: "Enter your name",
+              hintText: "Enter your password",
               suffixIcon: IconButton(
                 onPressed: () {
                   setState(() {
