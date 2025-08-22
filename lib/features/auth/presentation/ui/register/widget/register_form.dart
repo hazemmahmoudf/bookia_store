@@ -1,6 +1,9 @@
 import 'package:bookia/core/theme/app_color.dart';
 import 'package:bookia/core/widgets/app_buttom.dart';
+import 'package:bookia/features/auth/data/cubit/create_account_cubit.dart';
+import 'package:bookia/features/home/presentation/ui/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -10,19 +13,43 @@ class RegisterForm extends StatefulWidget {
   State<RegisterForm> createState() => _RegisterFormState();
 }
 
-TextEditingController? controllerPassword = TextEditingController();
+
+class _RegisterFormState extends State<RegisterForm> {
+TextEditingController controllerUsername = TextEditingController();
+TextEditingController controllerEmail = TextEditingController();
+TextEditingController controllerPassword = TextEditingController();
+TextEditingController controllerConfirmPassword = TextEditingController();
+
 var key = GlobalKey<FormState>();
 bool obscureTextC = false;
 bool obscureTextP = false;
-
-class _RegisterFormState extends State<RegisterForm> {
+@override
+void dispose() {
+    controllerUsername.dispose();
+    controllerEmail.dispose();
+    controllerPassword.dispose();
+    controllerConfirmPassword.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Form(
       key: key,
-      child: Column(
+      child: BlocConsumer<CreateAccountCubit, CreateAccountState>(
+  listener: (context, state) {
+    debugPrint("state of create account ${state.toString()}");
+    if(state is CreateAccountSuccess){
+     Navigator.pushNamed(context, '/home');
+    }else if(state is CreateAccountError){
+     debugPrint("error");
+    }
+  }
+  ,
+  builder: (context, state) {
+    return Column(
         children: [
           TextFormField(
+            controller: controllerUsername,
             validator: (v) {
               if (v == null || v.isEmpty) {
                 return "Please enter your name";
@@ -43,8 +70,9 @@ class _RegisterFormState extends State<RegisterForm> {
           ),
           SizedBox(height: 11.h),
           TextFormField(
+            controller: controllerEmail,
             validator: (v) {
-              RegExp email = RegExp(r'^[\w]+@([\w]+\.)\w{2,3}$');
+              RegExp email = RegExp(r'^\w+@(\w+\.)\w{2,3}$');
               if (v == null || v.isEmpty) {
                 return "Please enter your email";
               } else if (!email.hasMatch(v)) {
@@ -101,8 +129,8 @@ class _RegisterFormState extends State<RegisterForm> {
                 },
                 icon: Icon(
                   (obscureTextP)
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
                 ),
               ),
               hintText: "Password",
@@ -117,8 +145,9 @@ class _RegisterFormState extends State<RegisterForm> {
           ),
           SizedBox(height: 11.h),
           TextFormField(
+            controller: controllerConfirmPassword,
             validator: (v) {
-              if (v != controllerPassword!.text) {
+              if (v != controllerPassword.text) {
                 return "Does not match the password";
               }
               return null;
@@ -133,10 +162,10 @@ class _RegisterFormState extends State<RegisterForm> {
                   });
                 },
                 icon: (obscureTextC)
-                    ? Icon(Icons.visibility_off_outlined)
-                    : Icon(Icons.visibility_outlined),
+                    ? Icon(Icons.visibility_outlined)
+                    : Icon(Icons.visibility_off_outlined),
               ),
-              hintText: "Comfirm Password",
+              hintText: "Confirm Password",
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.r),
               ),
@@ -147,20 +176,27 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
           ),
           SizedBox(height: 30.h),
+          if(state is CreateAccountLoading )
+            LinearProgressIndicator(),
           AppButtom(
             title: "Register",
             backGroundColor: AppColor.mainColor,
             onPressed: () {
               if (key.currentState?.validate() ?? false) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => Scaffold()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (_) => Scaffold()),
+                // );
+                context.read<CreateAccountCubit>().createAccount(name: controllerUsername.text,
+                    email: controllerEmail.text,
+                    password: controllerPassword.text, confirmPassword: controllerConfirmPassword.text);
               }
             },
           ),
         ],
-      ),
+      );
+  },
+),
     );
   }
 }

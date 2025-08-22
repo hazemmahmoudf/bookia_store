@@ -1,18 +1,12 @@
 import 'package:bookia/bookia_app.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Future.delayed(Duration(milliseconds: 100));
+  final prefs = await SharedPreferences.getInstance();
+
   runApp(
-    ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return const BookiaApp();
-      },
-    ),
+    BookiaApp(prefs: prefs,),
   );
 }

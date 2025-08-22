@@ -1,8 +1,10 @@
 import 'package:bookia/core/theme/app_color.dart';
 import 'package:bookia/core/widgets/app_buttom.dart';
+import 'package:bookia/features/auth/data/cubit/create_account_cubit.dart';
 import 'package:bookia/features/auth/presentation/ui/login/login_screen.dart';
 import 'package:bookia/features/auth/presentation/ui/register/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constants/app_images.dart';
@@ -36,10 +38,7 @@ class WelcomScreen extends StatelessWidget {
                 title: 'Login',
                 backGroundColor: AppColor.mainColor,
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => LoginScreen()),
-                  );
+                  Navigator.pushNamed(context, '/login');
                 },
               ),
             ),
@@ -50,10 +49,7 @@ class WelcomScreen extends StatelessWidget {
                 title: 'Register',
                 backGroundColor: Colors.white,
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => RegisterScreen()),
-                  );
+                  Navigator.pushNamed(context, '/register');
                 },
               ),
             ),
