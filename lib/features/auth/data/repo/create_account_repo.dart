@@ -1,3 +1,4 @@
+import 'package:bookia/core/constants/api_constants.dart';
 import 'package:bookia/core/services/network/network_service.dart';
 
 class CreateAccountRepo{
@@ -14,7 +15,7 @@ class CreateAccountRepo{
       )async{
 
     try{
-      final response =await NetworkService.dio.post("register",data: {
+      final response =await NetworkService.dio.post(ApiConstants.register,data: {
         "name":name,
         "email":email,
         "password":password,

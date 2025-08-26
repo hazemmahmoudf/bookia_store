@@ -41,7 +41,7 @@ void dispose() {
     if(state is CreateAccountSuccess){
      Navigator.pushNamed(context, '/home');
     }else if(state is CreateAccountError){
-     debugPrint("error");
+     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("verify data")));
     }
   }
   ,
