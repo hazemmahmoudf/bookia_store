@@ -1,7 +1,7 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:bookia/core/services/network/network_service.dart';
+
 class CreateAccountRepo{
-  static Dio? _dio;
+
 
  static createAccount(
   {
@@ -12,24 +12,16 @@ class CreateAccountRepo{
 }
 
       )async{
-    _dio=Dio(
-      BaseOptions(
-        baseUrl: "https://codingarabic.online/api/",
-        headers: {
-          "Accept":"application/json",
-          "Content-Type":"application/json"
-        }
-      )
-    );
+
     try{
-      final response =await _dio?.post("register",data: {
+      final response =await NetworkService.dio.post("register",data: {
         "name":name,
         "email":email,
         "password":password,
         "password_confirmation":confirmPassword
       });
-      if(response?.statusCode==201){
-        return response?.data;
+      if(response.statusCode==201){
+        return response.data;
       }
       else{
         return null;
