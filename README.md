@@ -17,4 +17,4 @@
 
 | Home Screen | Book Details | Library |
 |------------|--------------|---------|
-| ![home](assets/images/home.png) | ![details](assets/images/book_details.png) | ![library](assets/images/library.png) |
+| ![home](assets/images/image_splash.png) | ![details](assets/images/book_details.png) | ![library](assets/images/library.png) |
