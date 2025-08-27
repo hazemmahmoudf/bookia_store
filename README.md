@@ -15,11 +15,17 @@
 
 ## Screenshots
 
-### Home Screen  
-![home](assets/images/image_splash.png)
+### Splash Screen  
+![splash](assets/images/image_splash.png)
 
 ### Welcome Screen  
-![welcome](assets/images/welcome_back_ground.png)
+![welcome](assets/images/welcome.png)
+
+### Login Screen  
+![login](assets/images/image_login.png)
+
+### Home screen
+![home](assets/images/home_screen.png)
 
 ### Login Screen  
 ![login](assets/images/image_login.png)
