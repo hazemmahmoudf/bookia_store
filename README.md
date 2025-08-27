@@ -15,6 +15,14 @@
 
 ## Screenshots
 
-| Home Screen | Book Details | Library |
-|------------|--------------|---------|
-| ![home](assets/images/image_splash.png) | ![details](assets/images/book_details.png) | ![library](assets/images/library.png) |
+### Home Screen  
+![home](assets/images/image_splash.png)
+
+### Welcome Screen  
+![welcome](assets/images/welcome_back_ground.png)
+
+### Login Screen  
+![login](assets/images/image_login.png)
+
+### Register Screen  
+![register](assets/images/image_register.png)
