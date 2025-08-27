@@ -9,5 +9,9 @@ class AppImages {
   static const String iconFaceBook = 'assets/images/icon_face_book.png';
   static const String iconGoogle = 'assets/images/icon_google.png';
   static const String iconApple = 'assets/images/icon_apple.png';
+  static const String imageAppBar = 'assets/images/image_app_bar.png';
+  static const String imageSlider1 = 'assets/images/image_slider.png';
+  static const String imageSlider2 = 'assets/images/slider__image.png';
+  static const String imageSlider3 = 'assets/images/slider_image.png';
 
 }
