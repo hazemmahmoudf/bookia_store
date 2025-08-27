@@ -24,11 +24,11 @@
 ### Login Screen  
 ![login](assets/images/image_login.png)
 
+### Register Screen  
+![register](assets/images/image_register.png)
+
 ### Home screen
 ![home](assets/images/home_screen.png)
 
-### Login Screen  
-![login](assets/images/image_login.png)
 
-### Register Screen  
-![register](assets/images/image_register.png)
+
