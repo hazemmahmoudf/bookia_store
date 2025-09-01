@@ -1,18 +1,34 @@
 import 'package:bookia/core/constants/api_constants.dart';
 import 'package:bookia/core/services/network/network_service.dart';
+import 'package:bookia/features/home/data/models/banner_model.dart';
+import 'package:bookia/features/home/data/models/best_seller_model.dart';
 
 class Home{
-  static productAll()async{
+  static bestSeller()async{
     try{
-   final  repo=await NetworkService.dio.get(ApiConstants.products);
+   final  repo=await NetworkService.dio.get(ApiConstants.productsBestseller);
    if(repo.statusCode==200){
-     return repo.data;
+     return BestSeller.fromJson(repo.data);
    }
    else{
      return null;
    }
     }catch(e){
-      return e;
+      return null;
+    }
+  }
+
+  static sliderImage()async{
+    try{
+      final repo=await NetworkService.dio.get(ApiConstants.sliders);
+      if(repo.statusCode==200){
+        return BannerModel.fromJson(repo.data);
+      }
+      else{
+        return null;
+      }
+    }catch(e){
+      return null;
     }
   }
 }

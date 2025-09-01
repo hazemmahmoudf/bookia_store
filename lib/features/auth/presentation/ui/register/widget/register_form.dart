@@ -39,7 +39,7 @@ void dispose() {
   listener: (context, state) {
     debugPrint("state of create account ${state.toString()}");
     if(state is CreateAccountSuccess){
-     Navigator.pushNamed(context, '/home');
+     Navigator.pushNamed(context, '/bottom');
     }else if(state is CreateAccountError){
      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("verify data")));
     }

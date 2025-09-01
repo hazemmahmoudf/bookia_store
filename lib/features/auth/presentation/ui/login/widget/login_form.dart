@@ -32,7 +32,7 @@ class _LoginFormState extends State<LoginForm> {
       child: BlocConsumer<CreateAccountCubit, CreateAccountState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
-            Navigator.pushReplacementNamed(context, '/home');
+            Navigator.pushReplacementNamed(context, '/bottom');
           } else if (state is LoginError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(

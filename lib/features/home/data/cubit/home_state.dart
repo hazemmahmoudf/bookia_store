@@ -5,11 +5,21 @@ sealed class HomeState {}
 
 final class HomeInitial extends HomeState {}
 final class HomeSuccess extends HomeState {
-  List product=[];
+ final List product;
   HomeSuccess(this.product);
 }
 final class HomeError extends HomeState {
-  String messageError;
+  final String messageError;
   HomeError(this.messageError);
 }
 final class HomeLoading extends HomeState {}
+
+final class SliderError extends HomeState {
+
+}
+final class SliderSuccess extends HomeState {
+final List<Sliders> images;
+  SliderSuccess(this.images) ;
+}
+final class SliderLoading extends HomeState {}
+

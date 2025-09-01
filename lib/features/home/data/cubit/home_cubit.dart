@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:bookia/features/home/data/models/banner_model.dart';
+import 'package:bookia/features/home/data/models/best_seller_model.dart';
 import 'package:meta/meta.dart';
 
 import '../repo/home.dart';
@@ -8,19 +10,40 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 
-  productAll()async{
+  bestSeller()async{
     emit(HomeLoading());
   try{
-    final repo=await  Home.productAll();
-    if(repo["status"]==200){
-      final product= repo["data"]["products"];
-      emit(HomeSuccess(product));
+    final repo=await  Home.bestSeller();
+    if(repo==null){
+
+      emit(HomeError("Something went wrong!"));
     }
     else{
-     emit(HomeError("Something went wrong!"));
+     if(repo is BestSeller){
+       emit(HomeSuccess(repo.data?.products??[]));
+     }
     }
   }catch(e){
     emit(HomeError(e.toString()));
   }
   }
-}
+
+
+  imageSlider()async{
+    emit(SliderLoading());
+    try{
+      final response=await Home.sliderImage();
+      if(response==null){
+        emit(SliderError());}
+      else{
+        if(response is BannerModel){
+          emit(SliderSuccess(response.data?.sliders??[]));
+        }
+      }
+      }catch(e){
+        emit(SliderError());
+    }
+    }
+  }
+
+

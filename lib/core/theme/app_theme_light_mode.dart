@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppThemeLightMode {
   static ThemeData theme=ThemeData(
+    useMaterial3: true,
     fontFamily: "DMSerifDisplay",
     scaffoldBackgroundColor: Colors.white,
     textTheme:lightTextStyle,
@@ -22,6 +23,9 @@ TextTheme lightTextStyle=TextTheme(
   ),titleSmall: TextStyle(
   fontSize: 15.sp
 ),
+  titleMedium: TextStyle(
+    fontSize: 24.sp
+  )
 
 );
 InputDecorationTheme textFormField=InputDecorationTheme(
