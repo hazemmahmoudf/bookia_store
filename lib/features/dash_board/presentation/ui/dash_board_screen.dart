@@ -7,6 +7,8 @@ import 'package:bookia/features/person/presentation/ui/person_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../home/presentation/cubit/home_cubit.dart';
+
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({super.key});
@@ -19,10 +21,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   int index = 0;
 
   List<Widget> screens = [
-    HomeScreen(),
+    BlocProvider(
+      create: (context) => HomeCubit(),
+      child: HomeScreen(),
+    ),
     BookMarkScreen(),
     BlocProvider(
-      create: (context) => BasketCubit()..showCard(),
+      create: (context) =>
+      BasketCubit()
+        ..showCard(),
       child: BasketScreen(),
     ),
     PersonScreen(),

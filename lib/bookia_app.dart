@@ -12,15 +12,9 @@ import 'features/auth/presentation/cubit/create_account_cubit.dart';
 import 'features/auth/presentation/ui/register/register_screen.dart';
 import 'features/home/presentation/cubit/home_cubit.dart';
 
-class BookiaApp extends StatefulWidget {
+class BookiaApp extends StatelessWidget {
   const BookiaApp({super.key});
 
-  @override
-  State<BookiaApp> createState() => _BookiaAppState();
-}
-
-class _BookiaAppState extends State<BookiaApp> {
-  @override
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -29,10 +23,6 @@ class _BookiaAppState extends State<BookiaApp> {
       splitScreenMode: true,
       builder: (_, child) {
         return
-          MultiBlocProvider(
-            providers: [
-            BlocProvider(create: (context) => HomeCubit()),
-        ],child:
           MaterialApp(
           theme: AppThemeLightMode.theme,
           debugShowCheckedModeBanner: false,
@@ -50,7 +40,7 @@ class _BookiaAppState extends State<BookiaApp> {
             '/home': (context) => HomeScreen(),
             '/bottom': (context) => DashBoardScreen(),
           },
-          ) );
+           );
       },
     );
   }
