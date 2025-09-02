@@ -1,15 +1,13 @@
+import 'dart:developer';
+
 import 'package:bookia/core/constants/app_images.dart';
-import 'package:bookia/core/widgets/app_buttom.dart';
-import 'package:bookia/features/home/data/cubit/home_cubit.dart';
-import 'package:bookia/features/home/data/models/best_seller_model.dart';
+import 'package:bookia/core/theme/app_color.dart';
 import 'package:bookia/features/home/presentation/ui/widget/best_seller_card.dart';
 import 'package:bookia/features/home/presentation/ui/widget/image_slider.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../core/theme/app_color.dart';
+import '../cubit/home_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -43,13 +41,15 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(width: 13.w),
         ],
       ),
-      body: BlocBuilder<HomeCubit, HomeState>(
+      body: BlocConsumer<HomeCubit, HomeState>(
         buildWhen: (prev, current) =>
             current is HomeSuccess ||
             current is HomeError ||
             current is HomeLoading,
         builder: (context, state) {
-          if (state is HomeLoading) Center(child: CircularProgressIndicator());
+          if (state is HomeLoading) {
+            return Center(child: CircularProgressIndicator());
+          }
           if (state is HomeSuccess) {
             return CustomScrollView(
               slivers: [
@@ -76,7 +76,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       BuildContext context,
                       int index,
                     ) {
-                      return BestSellerCard(products: state.product[index]);
+                      return BestSellerCard(
+                        products: state.product[index],
+                        onPressed: () {
+                          context.read<HomeCubit>().addToCard(
+                            state.product[index].id ?? 0,
+                          );
+                        },
+                      );
                     }, childCount: state.product.length),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -125,6 +132,19 @@ class _HomeScreenState extends State<HomeScreen> {
             return Image.asset(AppImages.imageNoInternet);
           } else {
             return SizedBox();
+          }
+        },
+        listener: (BuildContext context, HomeState state) {
+          if (state is AddToCartSuccessState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: AppColor.mainColor,
+                content: Text(
+                  "add to cart",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            );
           }
         },
       ),

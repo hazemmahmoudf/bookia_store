@@ -1,13 +1,10 @@
 import 'package:bookia/core/theme/app_color.dart';
-import 'package:bookia/features/home/data/cubit/home_cubit.dart';
-import 'package:bookia/features/home/data/models/banner_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import '../../../../../core/constants/app_images.dart';
+import '../../cubit/home_cubit.dart';
 
 class ImageSlider extends StatefulWidget {
   const ImageSlider({super.key});

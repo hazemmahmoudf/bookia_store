@@ -4,11 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/theme/app_color.dart';
 class BestSellerCard extends StatelessWidget {
+  final void Function()? onPressed;
  final Products products;
-  const BestSellerCard({super.key, required this.products});
-
+  const BestSellerCard({super.key, required this.products, this.onPressed});
   @override
   Widget build(BuildContext context) {
+    final originalPrice = double.tryParse(products.price ?? "0") ?? 0;
+    final discount = products.discount ?? 0;
+    final priceAfterDiscount = originalPrice - (originalPrice * discount / 100);
     return Container(
       width: 165.w,
       height: 280.h,
@@ -44,14 +47,16 @@ class BestSellerCard extends StatelessWidget {
             Row(
               mainAxisAlignment:  MainAxisAlignment.spaceBetween,
               children: [
-                Text("₹${products.price}"),
+
+
+    Text("₹${priceAfterDiscount.toString()}"),
                 ElevatedButton(style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
                   minimumSize: Size(60.w, 30.h),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.r),
                   ),
-                ),onPressed: (){}, child: Text("Buy",style: TextStyle(
+                ),onPressed:onPressed , child: Text("Buy",style: TextStyle(
                     color: Colors.white
                 ),))
               ],

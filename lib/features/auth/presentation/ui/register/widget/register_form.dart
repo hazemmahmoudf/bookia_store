@@ -1,10 +1,10 @@
 import 'package:bookia/core/theme/app_color.dart';
 import 'package:bookia/core/widgets/app_buttom.dart';
-import 'package:bookia/features/auth/data/cubit/create_account_cubit.dart';
-import 'package:bookia/features/home/presentation/ui/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../cubit/create_account_cubit.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});

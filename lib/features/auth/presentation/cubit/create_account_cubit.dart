@@ -2,9 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:bookia/core/services/local/shared_prefs_helper.dart';
 import 'package:bookia/features/auth/data/repo/login.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../repo/create_account_repo.dart';
+import '../../data/repo/create_account_repo.dart';
 
 part 'create_account_state.dart';
 

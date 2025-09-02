@@ -1,6 +1,5 @@
 import 'package:bookia/core/theme/app_color.dart';
 import 'package:bookia/core/widgets/app_buttom.dart';
-import 'package:bookia/features/auth/data/cubit/create_account_cubit.dart';
 import 'package:bookia/features/auth/presentation/ui/login/login_screen.dart';
 import 'package:bookia/features/auth/presentation/ui/register/register_screen.dart';
 import 'package:flutter/material.dart';

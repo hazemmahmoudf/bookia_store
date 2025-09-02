@@ -1,10 +1,11 @@
 import 'package:bookia/core/theme/app_color.dart';
+import 'package:bookia/features/basket/presentation/cubit/basket_cubit.dart';
 import 'package:bookia/features/basket/presentation/ui/basket_screen.dart';
 import 'package:bookia/features/book_mark/presentation/ui/book_mark_screen.dart';
-import 'package:bookia/features/home/data/cubit/home_cubit.dart';
 import 'package:bookia/features/home/presentation/ui/home_screen.dart';
 import 'package:bookia/features/person/presentation/ui/person_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class DashBoardScreen extends StatefulWidget {
@@ -20,7 +21,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   List<Widget> screens = [
     HomeScreen(),
     BookMarkScreen(),
-    BasketScreen(),
+    BlocProvider(
+      create: (context) => BasketCubit()..showCard(),
+      child: BasketScreen(),
+    ),
     PersonScreen(),
   ];
 

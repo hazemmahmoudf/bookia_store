@@ -3,45 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppThemeLightMode {
-  static ThemeData theme=ThemeData(
+  static ThemeData theme = ThemeData(
     useMaterial3: true,
     fontFamily: "DMSerifDisplay",
     scaffoldBackgroundColor: Colors.white,
-    textTheme:lightTextStyle,
-      appBarTheme: AppBarTheme(
-          backgroundColor: Colors.transparent
-      ),
+    textTheme: lightTextStyle,
+    appBarTheme: AppBarTheme(backgroundColor: Colors.transparent),
     inputDecorationTheme: textFormField,
   );
 }
-TextTheme lightTextStyle=TextTheme(
-  displayLarge: TextStyle(
-    fontSize: 30.sp,
-  ),
-  displaySmall: TextStyle(
-    fontSize: 20.sp
-  ),titleSmall: TextStyle(
-  fontSize: 15.sp
-),
-  titleMedium: TextStyle(
-    fontSize: 24.sp
-  )
 
+TextTheme lightTextStyle = TextTheme(
+  displayLarge: TextStyle(fontSize: 30.sp),
+  displaySmall: TextStyle(fontSize: 20.sp),
+  titleSmall: TextStyle(fontSize: 15.sp),
+  titleMedium: TextStyle(fontSize: 24.sp),
+  bodyMedium: TextStyle(fontSize: 16.sp),
+  bodyLarge: TextStyle(fontSize: 18.sp, color: AppColor.colorBlack3),
 );
-InputDecorationTheme textFormField=InputDecorationTheme(
+InputDecorationTheme textFormField = InputDecorationTheme(
   fillColor: AppColor.lightGrey,
   filled: true,
-  border: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(8.r),
-
-  ),
+  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r)),
   enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(
-      color: AppColor.borderColor
-    )
+    borderSide: BorderSide(color: AppColor.borderColor),
   ),
-  hintStyle: TextStyle(
-color:AppColor.hintColor,
-    fontSize: 15.sp
-  )
+  hintStyle: TextStyle(color: AppColor.hintColor, fontSize: 15.sp),
 );
