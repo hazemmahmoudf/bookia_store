@@ -39,4 +39,20 @@ class ShowCardRepo {
       return null;
     }
   }
+  static updateCard({required String cartItemId,required int quantity})async{
+    try{
+      Response response=await NetworkService.dio.post(ApiConstants.updateCart,data: {
+        "cart_item_id" : cartItemId,
+        "quantity":quantity
+      });
+      if(response.statusCode==201){
+        return response;
+      }
+      else{
+        return null;
+      }
+    }catch(e){
+      return null;
+    }
+  }
 }

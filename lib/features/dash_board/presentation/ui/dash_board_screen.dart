@@ -29,7 +29,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     BlocProvider(
       create: (context) =>
       BasketCubit()
-        ..showCard(),
+        ..showCard(true),
       child: BasketScreen(),
     ),
     PersonScreen(),

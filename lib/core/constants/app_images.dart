@@ -15,5 +15,7 @@ class AppImages {
   static const String imageSlider3 = 'assets/images/slider_image.png';
   static const String iconHome = 'assets/images/icon_home.png';
   static const String imageNoInternet = 'assets/images/image_no_internet.png';
+  static const String imageCheckout = 'assets/images/check_out_image.png';
+  static const String imageTrue = 'assets/images/image_true.png';
 
 }

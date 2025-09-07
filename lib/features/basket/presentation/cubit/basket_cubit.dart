@@ -9,12 +9,14 @@ part 'basket_state.dart';
 class BasketCubit extends Cubit<BasketState> {
   BasketCubit() : super(BasketInitial());
 
-  showCard()async{
-    emit(BasketLoading());
+  showCard(bool removeCard)async{
+    if(removeCard==true){
+      emit(BasketLoading());
+    }
     final response= await ShowCardRepo.showCard();
     if(response!=null){
     if(response is ShowCard){
-      emit(BasketSuccess(response.data?.cartItems??[],response.data?.total??""));
+      emit(BasketSuccess(response.data?.cartItems??[],response.data?.total));
     }
     }
     else{
@@ -26,10 +28,22 @@ class BasketCubit extends Cubit<BasketState> {
     final response= await ShowCardRepo.removeCart(itemId);
     if(response!=null){
       emit(BasketRemoveSuccess(response));
+      showCard(false);
     }
     else{
       emit(BasketRemoveError());
     }
+  }
+  updateCart({required String cartItemId,required int quantity})async{
+  emit(BasketUpdateLoading());
+  final repo=await ShowCardRepo.updateCard(cartItemId: cartItemId, quantity: quantity);
+  if(repo==null){
+    emit(BasketUpdateError());
+  }
+  else{
+    emit(BasketUpdateSuccess());
+
+  }
   }
 
 }

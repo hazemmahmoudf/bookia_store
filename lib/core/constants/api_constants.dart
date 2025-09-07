@@ -8,4 +8,5 @@ class ApiConstants{
   static const String addToCard="add-to-cart";
   static const String showCart="cart";
   static const String removeFromCart="remove-from-cart";
+  static const String updateCart="update-cart";
 }

@@ -15,7 +15,7 @@ class ShowCard {
 class Data {
   int? id;
   User? user;
-  String? total;
+  double? total;           // عدلنا النوع لـ double
   List<CartItems>? cartItems;
 
   Data({this.id, this.user, this.total, this.cartItems});
@@ -23,7 +23,13 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
-    total = json['total'];
+
+    // تحويل الـ total لـ double
+    final t = json['total'];
+    if (t != null) {
+      total = t is num ? t.toDouble() : double.tryParse(t.toString());
+    }
+
     if (json['cart_items'] != null) {
       cartItems = <CartItems>[];
       json['cart_items'].forEach((v) {
@@ -50,7 +56,7 @@ class CartItems {
   int? itemProductId;
   String? itemProductName;
   String? itemProductImage;
-  String? itemProductPrice;
+  String? itemProductPrice;         // السعر الأصلي String زي ما هو
   int? itemProductDiscount;
   double? itemProductPriceAfterDiscount;
   int? itemProductStock;
@@ -77,9 +83,21 @@ class CartItems {
     itemProductImage = json['item_product_image'];
     itemProductPrice = json['item_product_price'];
     itemProductDiscount = json['item_product_discount'];
-    itemProductPriceAfterDiscount = json['item_product_price_after_discount'];
+
+    // تحويل price_after_discount إلى double
+    final pad = json['item_product_price_after_discount'];
+    if (pad != null) {
+      itemProductPriceAfterDiscount =
+      pad is num ? pad.toDouble() : double.tryParse(pad.toString());
+    }
+
     itemProductStock = json['item_product_stock'];
     itemQuantity = json['item_quantity'];
-    itemTotal = json['item_total'];
+
+    // تحويل item_total إلى double
+    final it = json['item_total'];
+    if (it != null) {
+      itemTotal = it is num ? it.toDouble() : double.tryParse(it.toString());
+    }
   }
 }

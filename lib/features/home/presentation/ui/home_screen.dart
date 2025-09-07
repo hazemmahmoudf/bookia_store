@@ -138,6 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (state is AddToCartSuccessState) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                duration: Duration(milliseconds:500 ),
                 backgroundColor: AppColor.mainColor,
                 content: Text(
                   "add to cart",
