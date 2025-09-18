@@ -41,7 +41,7 @@ void dispose() {
     if(state is CreateAccountSuccess){
      Navigator.pushNamed(context, '/bottom');
     }else if(state is CreateAccountError){
-     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("verify data")));
+     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
     }
   }
   ,
@@ -113,8 +113,8 @@ void dispose() {
                 return "Must contain number";
               }else if (!symbols.hasMatch(v)) {
                 return "Must contain symbols";
-              }else if (v.length<6) {
-                return "Must contain 6 or more element";
+              }else if (v.length<8) {
+                return "Must contain 8 or more element";
               }
 
               return null;

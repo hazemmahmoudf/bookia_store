@@ -42,7 +42,7 @@ class BasketCubit extends Cubit<BasketState> {
   }
   else{
     emit(BasketUpdateSuccess());
-
+    showCard(false);
   }
   }
 

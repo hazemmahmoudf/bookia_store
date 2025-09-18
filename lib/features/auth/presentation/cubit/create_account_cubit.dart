@@ -30,15 +30,15 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
     );
     debugPrint(response.toString());
     if (response["status"] == 201) {
-      SharedPrefsHelper.setString("token", response['data']['token']);
+     await SharedPrefsHelper.setString("token", response['data']['token']);
       // _saveUserToken(response["data"]["token"]);
       emit(CreateAccountSuccess());
     } else {
-      emit(CreateAccountError());
+      emit(CreateAccountError(response["message"]?? "Registration failed"));
     }
   }
       catch(e){
-        emit(CreateAccountError());
+        emit(CreateAccountError("Validation Error"));
       }
   }
 
@@ -49,13 +49,20 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
 
   //   login
   login({required String email, required String password})async {
-    final repo=await Login.login(email: email, password: password);
     emit(LoginLoading());
-    if(repo["status"]==200){
-      SharedPrefsHelper.setString("token", repo['data']['token']);
-      emit(LoginSuccess());
-    }else{
-      emit(LoginError());
-    }
+   try{
+     final repo=await Login.login(email: email, password: password);
+     if(repo["status"]==200){
+       await SharedPrefsHelper.setString("token", repo['data']['token']);
+       emit(LoginSuccess("Login successfully"));
+     }else if(repo==null){
+       emit(LoginError("The email or password is not registered"));
+     }
+   }catch(e){
+     emit(LoginError("The email or password is not registered"));
+   }
+  }
+  void reset() {
+    emit(CreateAccountInitial());
   }
 }

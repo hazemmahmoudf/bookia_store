@@ -54,9 +54,9 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       Container(
                         height: 56.h,
-                        width: 105.w,
+                        width: 100.w,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+
                           borderRadius: BorderRadius.circular(16.r),
                           border: Border.all(color: AppColor.borderColor),
                         ),
@@ -64,23 +64,24 @@ class LoginScreen extends StatelessWidget {
                       ),
                       Container(
                         height: 56.h,
-                        width: 105.w,
+                        width: 100.w,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+
                           borderRadius: BorderRadius.circular(16.r),
                           border: Border.all(color: AppColor.borderColor),
                         ),
                         child: Image.asset(AppImages.iconGoogle),
                       ),
+
                       Container(
                         height: 56.h,
-                        width: 105.w,
+                        width: 100.w,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          
                           borderRadius: BorderRadius.circular(16.r),
                           border: Border.all(color: AppColor.borderColor),
                         ),
-                        child: Image.asset(AppImages.iconApple),
+                        child: Icon(Icons.apple,size: 30,),
                       ),
                     ],
                   ),

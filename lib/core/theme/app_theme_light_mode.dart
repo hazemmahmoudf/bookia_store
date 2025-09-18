@@ -4,23 +4,32 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppThemeLightMode {
   static ThemeData theme = ThemeData(
-    useMaterial3: true,
-    fontFamily: "DMSerifDisplay",
+    // fontFamily: "DMSerifDisplay",
     scaffoldBackgroundColor: Colors.white,
     textTheme: lightTextStyle,
-    appBarTheme: AppBarTheme(backgroundColor: Colors.transparent),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent,
+      foregroundColor: Colors.black, // يخلي العنوان والأيقونات تبان
+      elevation: 0,
+    ),
     inputDecorationTheme: textFormField,
+    iconTheme: const IconThemeData(color: Colors.black), // أيقونات تظهر
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColor.mainColor,
+      brightness: Brightness.light,
+    ),
   );
 }
 
 TextTheme lightTextStyle = TextTheme(
-  displayLarge: TextStyle(fontSize: 30.sp),
-  displaySmall: TextStyle(fontSize: 20.sp),
-  titleSmall: TextStyle(fontSize: 15.sp),
-  titleMedium: TextStyle(fontSize: 24.sp),
-  bodyMedium: TextStyle(fontSize: 16.sp),
+  displayLarge: TextStyle(fontSize: 30.sp, color: AppColor.colorBlack3),
+  displaySmall: TextStyle(fontSize: 20.sp, color: AppColor.colorBlack3),
+  titleSmall: TextStyle(fontSize: 15.sp, color: AppColor.colorBlack3),
+  titleMedium: TextStyle(fontSize: 24.sp, color: AppColor.colorBlack3),
+  bodyMedium: TextStyle(fontSize: 16.sp, color: AppColor.colorBlack3),
   bodyLarge: TextStyle(fontSize: 18.sp, color: AppColor.colorBlack3),
 );
+
 InputDecorationTheme textFormField = InputDecorationTheme(
   fillColor: AppColor.lightGrey,
   filled: true,

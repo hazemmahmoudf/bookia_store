@@ -17,5 +17,6 @@ class AppImages {
   static const String imageNoInternet = 'assets/images/image_no_internet.png';
   static const String imageCheckout = 'assets/images/check_out_image.png';
   static const String imageTrue = 'assets/images/image_true.png';
+  static const String imageHeart = 'assets/images/heart.png';
 
 }

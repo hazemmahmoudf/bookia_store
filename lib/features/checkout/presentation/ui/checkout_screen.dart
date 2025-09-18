@@ -2,8 +2,8 @@ import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/features/checkout/presentation/ui/widgets/checkout_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-class BookDetailsScreen extends StatelessWidget {
-  const BookDetailsScreen({super.key});
+class CheckoutScreen extends StatelessWidget {
+  const CheckoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

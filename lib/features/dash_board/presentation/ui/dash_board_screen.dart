@@ -1,8 +1,10 @@
 import 'package:bookia/core/theme/app_color.dart';
 import 'package:bookia/features/basket/presentation/cubit/basket_cubit.dart';
 import 'package:bookia/features/basket/presentation/ui/basket_screen.dart';
+import 'package:bookia/features/book_mark/presentation/cubit/wishlist_cubit.dart';
 import 'package:bookia/features/book_mark/presentation/ui/book_mark_screen.dart';
 import 'package:bookia/features/home/presentation/ui/home_screen.dart';
+import 'package:bookia/features/person/presentation/cubit/person_cubit.dart';
 import 'package:bookia/features/person/presentation/ui/person_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,14 +27,22 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       create: (context) => HomeCubit(),
       child: HomeScreen(),
     ),
-    BookMarkScreen(),
+    BlocProvider(
+      create: (context) => WishlistCubit()..showWishList(),
+      child: BookMarkScreen(),
+    ),
     BlocProvider(
       create: (context) =>
       BasketCubit()
         ..showCard(true),
       child: BasketScreen(),
     ),
-    PersonScreen(),
+    BlocProvider(
+      create: (context) =>
+      PersonCubit()
+        ..getPersonData(),
+      child: PersonScreen(),
+    ),
   ];
 
   @override
@@ -41,7 +51,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: index,
-        backgroundColor: Colors.white,
         fixedColor: AppColor.mainColor,
         onTap: (i) {
           setState(() {

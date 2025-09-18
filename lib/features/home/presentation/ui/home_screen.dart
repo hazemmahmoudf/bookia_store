@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/theme/app_color.dart';
 import 'package:bookia/features/home/presentation/ui/widget/best_seller_card.dart';
@@ -7,6 +5,8 @@ import 'package:bookia/features/home/presentation/ui/widget/image_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../book_details/presentation/ui/book_details_screen.dart';
+import 'search_screen.dart';
 import '../cubit/home_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isClick = false;
   @override
   void initState() {
     super.initState();
@@ -27,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+
         scrolledUnderElevation: 0,
         elevation: 0,
 
@@ -37,7 +38,20 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         leadingWidth: 100,
         actions: [
-          Icon(Icons.search, size: 24.sp),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => BlocProvider.value(
+                    value: context.read<HomeCubit>(),
+                    child: SearchScreen(),
+                  ),
+                ),
+              );
+            },
+            child: Icon(Icons.search, size: 24.sp),
+          ),
           SizedBox(width: 13.w),
         ],
       ),
@@ -77,19 +91,49 @@ class _HomeScreenState extends State<HomeScreen> {
                       int index,
                     ) {
                       return BestSellerCard(
+                        onTapF: () {
+                          final productId = state.product[index].id ?? 0;
+                          final cubit = context.read<HomeCubit>();
+
+
+                            cubit.addFavorite(productId); // API call add
+
+
+                          cubit.addFavoriteClick(productId); // update local state
+                        },
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => BlocProvider.value(
+                                value: context.read<HomeCubit>(),
+                                child: BookDetailsScreen(
+                                  products: state.product[index],
+                                  onPressed: () {
+                                    context.read<HomeCubit>().addToCard(
+                                      state.product[index].id ?? 0,
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                         products: state.product[index],
                         onPressed: () {
                           context.read<HomeCubit>().addToCard(
                             state.product[index].id ?? 0,
                           );
                         },
+
+
                       );
                     }, childCount: state.product.length),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      mainAxisSpacing: 10.0.h,
+                      mainAxisSpacing: 0.0.h,
                       crossAxisSpacing: 10.0.w,
-                      childAspectRatio: 3.w / 4.2.h,
+                      childAspectRatio: 3.w / 4.9.h,
                     ),
                   ),
                 ),
@@ -138,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (state is AddToCartSuccessState) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                duration: Duration(milliseconds:500 ),
+                duration: Duration(milliseconds: 500),
                 backgroundColor: AppColor.mainColor,
                 content: Text(
                   "add to cart",

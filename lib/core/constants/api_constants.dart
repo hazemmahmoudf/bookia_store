@@ -9,4 +9,10 @@ class ApiConstants{
   static const String showCart="cart";
   static const String removeFromCart="remove-from-cart";
   static const String updateCart="update-cart";
+  static const String booksSearch="products-search";
+  static const String profile="profile";
+  static const String addToWishlist="add-to-wishlist";
+  static const String wishlist="wishlist";
+  static const String removeFromWishlist="remove-from-wishlist";
+  static const String updateProfile="update-profile";
 }

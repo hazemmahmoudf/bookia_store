@@ -17,7 +17,7 @@ class Login{
     }
   }
   catch(e){
-    return e;
+    return null;
   }
   }
   }

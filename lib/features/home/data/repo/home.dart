@@ -10,7 +10,7 @@ class Home {
   static bestSeller() async {
     try {
       final repo = await NetworkService.dio.get(
-        ApiConstants.productsBestseller,
+        ApiConstants.products,
       );
       if (repo.statusCode == 200) {
         return BestSeller.fromJson(repo.data);
@@ -55,4 +55,21 @@ class Home {
       return null;
     }
   }
+  static booksSearch(String name) async {
+
+    try {
+      Response repo = await NetworkService.dio.get(
+        ApiConstants.booksSearch,
+        queryParameters: {"name": name},
+      );
+      if (repo.statusCode == 200) {
+        return BestSeller.fromJson(repo.data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
 }

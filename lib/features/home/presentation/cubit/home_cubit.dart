@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:bookia/features/book_mark/data/repo/wishlist_repo.dart';
 import 'package:bookia/features/home/data/models/banner_model.dart';
 import 'package:bookia/features/home/data/models/best_seller_model.dart';
 import 'package:dio/dio.dart';
@@ -51,6 +52,40 @@ class HomeCubit extends Cubit<HomeState> {
       emit(AddToCartSuccessState(response));
     } else {
       emit(AddToCartErrorState());
+    }
+  }
+  booksSearch(String name) async {
+    emit(SearchLoadingState());
+    final response = await Home.booksSearch(name);
+    if (response != null) {
+      if(response is BestSeller){
+        emit(SearchSuccessState(response.data?.products??[]));
+      }
+    } else {
+      emit(SearchErrorState("non found, please try again!"));
+    }
+
+  }
+  Map<int, bool> favorites = {}; // productId -> isFavorite
+
+
+  void addFavoriteClick(int productId) {
+    favorites[productId] = true;
+    emit(CheckFavorite(productId: productId, isFavorite: true));
+  }void removeFavoriteClick(int productId) {
+    favorites[productId] = false;
+    emit(CheckFavorite(productId: productId, isFavorite: false));
+  }
+  bool isProductFavorite(int productId) {
+    return favorites[productId]??false;
+  }
+  addFavorite(int productId)async{
+    emit(FavoriteLoading());
+    final repo=await WishListRepo.addFavorite(productId);
+    if(repo!=null){
+      emit(FavoriteSuccess());
+    }else{
+      emit(FavoriteError());
     }
   }
 }

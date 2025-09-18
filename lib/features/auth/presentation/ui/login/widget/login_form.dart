@@ -19,6 +19,12 @@ class _LoginFormState extends State<LoginForm> {
   TextEditingController emailController=TextEditingController();
   TextEditingController passwordController=TextEditingController();
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<CreateAccountCubit>().reset();
+  }
+  @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
@@ -33,11 +39,18 @@ class _LoginFormState extends State<LoginForm> {
       child: BlocConsumer<CreateAccountCubit, CreateAccountState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
-            Navigator.pushReplacementNamed(context, '/bottom');
-          } else if (state is LoginError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text("Either the email or password is wrong"),
+                content: Text(state.message),
+                backgroundColor: Colors.green,
+                duration: Duration(seconds: 2),
+              ),
+            );
+            Navigator.pushNamedAndRemoveUntil(context, '/bottom',(b){return false;});}
+             else if(state is LoginError){
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
                 backgroundColor: Colors.red,
                 duration: Duration(seconds: 2),
               ),
@@ -105,8 +118,6 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               ),
               SizedBox(height: 62.h),
-              if(state is LoginLoading)
-                LinearProgressIndicator(),
               AppButtom(
                 title: "Login",
                 backGroundColor: AppColor.mainColor,
